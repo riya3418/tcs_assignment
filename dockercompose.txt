@@ -1,0 +1,43 @@
+#Dockercompose one
+
+FROM ubuntu:18.04
+RUN apt update
+RUN apt -y upgrade
+RUN apt -y install python3 python3-pip
+RUN pip3 --no-cache-dir install \
+pyopenssl \
+ndg-httpsclient \
+pyasn1
+WORKDIR "/root"
+CMD ["/bin/bash"]
+
+
+#Dockercompose two
+FROM ubuntu:18.04
+RUN apt update
+RUN apt -y upgrade
+RUN apt -y install python3 python3-pip
+RUN pip3 --no-cache-dir install \
+pyopenssl \
+ndg-httpsclient \
+RUN apt install -y default-jdk
+pyasn1
+WORKDIR "/root"
+CMD ["/bin/bash"]
+
+
+
+#Dockercompose.yml
+
+version:"3"
+services:
+	one:
+		build:
+			context: .
+			dockerfile: ./one/dockerfile
+			image: one
+	two:
+		build:
+			context: .
+			dockerfile: ./two/dockerfile
+			image: two
