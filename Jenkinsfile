@@ -1,13 +1,13 @@
 pipeline {
    agent any 
    tools {
-        maven 'Maven4.0.0' 
+        maven 'Maven3.6.3' 
     }
    
    stages {
        stage('SCM CheckOut'){
           steps {
-            git 'https://github.com/debashis-1306/TestApp'
+            git 'https://github.com/riya3418/TestApp'
           }
           }
       stage('Compile-Package'){
